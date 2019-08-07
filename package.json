@@ -3,9 +3,8 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "server": "webpack-dev-server",
-    "build": "npm run clean && webpack --mode=production",
-    "clean": "rimraf public"
+    "dev": "webpack-dev-server --config build/webpack.dev.conf.js",
+    "build": "webpack --config build/webpack.build.conf.js"
   },
   "keywords": [],
   "author": "",
@@ -15,10 +14,13 @@
     "axios": "^0.19.0",
     "effector": "^20.1.1",
     "effector-react": "^20.2.1",
+    "html-webpack-plugin": "^3.2.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-router-dom": "^5.0.1",
-    "styled-components": "^4.3.2"
+    "styled-components": "^4.3.2",
+    "webpack": "^4.39.1",
+    "webpack-merge": "^4.2.1"
   },
   "devDependencies": {
     "babel-core": "^6.26.3",
@@ -31,11 +33,12 @@
     "eslint-plugin-jsx-a11y": "^6.2.3",
     "eslint-plugin-react": "^7.14.3",
     "file-loader": "^4.1.0",
-    "html-webpack-plugin": "^3.2.0",
-    "rimraf": "^2.6.3",
     "url-loader": "^2.1.0",
-    "webpack": "^4.39.1",
     "webpack-cli": "^3.3.6",
     "webpack-dev-server": "^3.7.2"
-  }
+  },
+  "browserslist": [
+    "> 1%",
+    "last 3 version"
+  ]
 }

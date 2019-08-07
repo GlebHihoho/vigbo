@@ -1,23 +1,34 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-const APP_DIR = path.resolve(__dirname, 'src');
-const BUILD_DIR = path.resolve(__dirname, 'public');
+const PATHS = {
+  src: path.resolve(__dirname, '../src'),
+  public: path.resolve(__dirname, '../public'),
+};
 
 const config = {
-  context: APP_DIR,
+  externals: {
+    paths: PATHS,
+  },
+  context: PATHS.src,
   entry: './index.jsx',
   output: {
-    filename: '[name][chunkhash].js',
-    path: BUILD_DIR,
+    filename: '[name].[chunkHash].js',
+    path: PATHS.public,
   },
-  devServer: {
-    port: 3000,
-    open: true,
-    contentBase: BUILD_DIR,
-  },
-  mode: 'development',
   devtool: 'source-map',
+  optimization: {
+    splitChunks: {
+      cacheGroups: {
+        vendor: {
+          name: 'vendors',
+          test: /node_modules/,
+          chunks: 'all',
+          enforce: true,
+        },
+      },
+    },
+  },
   module: {
     rules: [
       {
@@ -37,7 +48,6 @@ const config = {
           options: {
             limit: 8000,
             name: '[path][name].[ext]',
-            outputPath: 'image/',
           },
         },
       },
