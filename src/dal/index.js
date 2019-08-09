@@ -2,8 +2,12 @@ import axios from 'axios';
 
 const URL = 'https://swapi.co/api';
 
-const getEntity = (name, page) => axios.get(`${URL}${name}/`, { params: { page } });
+const getEntityList = (entityType, page) => axios.get(`${URL}${entityType}/`, { params: { page } });
+const getEntityById = (entityType, id) => axios.get(`${URL}${entityType}/${id}`);
+const getEntityByUrl = url => axios.get(url);
 
 export default {
-  getEntity,
+  getEntityList,
+  getEntityById,
+  getEntityByUrl,
 };

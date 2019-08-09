@@ -1,26 +1,38 @@
-import React from 'react';
-import { NavLink } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { NavLink, withRouter } from 'react-router-dom';
 import styled from 'styled-components';
 
-import { entityList } from '../../constants/entityList';
+import { entities } from '../../constants';
 
-const Header = () => (
-  <List>
-    {
-      entityList.map(item => (
-        <NavLinkWrap
-          key={item}
-          to={`/${item}`}
-          activeClassName="active"
-        >
-          {item}
-        </NavLinkWrap>
-      ))
+import { setEntityType } from '../../model/entityTypeModel';
+
+const Header = (props) => {
+  const { location } = props;
+  const { pathname } = location;
+
+  useEffect(() => {
+    const entityType = `/${pathname.split('/')[1]}`;
+    setEntityType(entityType);
+  }, [pathname]);
+
+  return (
+    <List>
+      {
+        entities.map(item => (
+          <NavLinkWrap
+            key={item}
+            to={`/${item}`}
+            activeClassName="active"
+          >
+            {item}
+          </NavLinkWrap>
+        ))
       }
-  </List>
-);
+    </List>
+  );
+};
 
-export default Header;
+export default withRouter(Header);
 
 const List = styled.div`
   display: flex;

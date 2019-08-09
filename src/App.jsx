@@ -1,4 +1,5 @@
 import React from 'react';
+import uniqueId from 'lodash/uniqueId';
 import styled, { createGlobalStyle } from 'styled-components';
 import {
   HashRouter as Router, Route, Switch, Redirect,
@@ -6,24 +7,32 @@ import {
 
 import ResourcesList from './components/Header';
 import EntityList from './components/EntityList';
+import Entity from './components/Entity';
 
-import { entityList } from './constants/entityList';
-
+import { entities } from './constants';
 
 const App = () => (
   <Container>
     <Router>
       <ResourcesList />
       <Switch>
-        {/* <Route path="/people/:id" component={People} /> */}
-
         {
-          entityList.map(entity => (
+          entities.map(entity => (
             <Route
               key={entity}
               path={`/${entity}`}
               component={EntityList}
               exact
+            />
+          ))
+        }
+
+        {
+          entities.map(entity => (
+            <Route
+              key={uniqueId()}
+              path={`/${entity}/:id`}
+              component={Entity}
             />
           ))
         }

@@ -9,7 +9,7 @@ import {
   $nextPage,
   $prevPage,
 
-  setEntityType,
+  fetchEntityList,
   changePage,
 } from '../../model/entityListModel';
 
@@ -23,7 +23,7 @@ const EntityList = ({ location }) => {
   const prevPage = useStore($prevPage);
 
   useEffect(() => {
-    setEntityType(pathname);
+    fetchEntityList();
   }, []);
 
   return (

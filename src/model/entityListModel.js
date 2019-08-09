@@ -3,47 +3,44 @@ import { createStore, createEffect, createEvent } from 'effector';
 import dal from '../dal';
 import { getId } from '../helpers';
 
-export const $entityType = createStore('');
+import { $entityType } from './entityTypeModel';
+
 export const $entityList = createStore([]);
 export const $isLoadingEntityList = createStore(true);
 export const $nextPage = createStore(null);
 export const $prevPage = createStore(null);
 
-export const setEntityType = createEvent();
-export const refreshStore = createEvent();
+export const fetchEntityList = createEvent();
 export const changePage = createEvent();
 
 const _fetchEntityList = createEffect();
 
-_fetchEntityList
-  .use((page) => {
-    const entityType = $entityType.getState();
+_fetchEntityList.use((page) => {
+  const entityType = $entityType.getState();
 
-    return dal
-      .getEntity(entityType, page)
-      .then((response) => {
-        const { data: { results, next, previous } } = response;
+  return dal
+    .getEntityList(entityType, page)
+    .then((response) => {
+      const { data: { results, next, previous } } = response;
 
-        const list = results.map(el => ({
-          id: getId(el.url),
-          name: el.name || el.title,
-        }));
+      const list = results.map(el => ({
+        id: getId(el.url),
+        name: el.name || el.title,
+      }));
 
-        return {
-          list,
-          next: getId(next),
-          prev: getId(previous),
-        };
-      });
-  });
+      return {
+        list,
+        next: getId(next),
+        prev: getId(previous),
+      };
+    });
+});
+
+fetchEntityList
+  .watch(() => _fetchEntityList());
 
 changePage
   .watch(page => _fetchEntityList(page));
-
-$entityType.updates.watch(() => _fetchEntityList());
-
-$entityType
-  .on(setEntityType, (_, entityType) => entityType);
 
 $entityList
   .on(_fetchEntityList.done, (_, { result }) => [...result.list]);
