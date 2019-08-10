@@ -3,6 +3,7 @@ import isArray from 'lodash/isArray';
 import isEmpty from 'lodash/isEmpty';
 
 import dal from '../dal';
+import { entityKeys } from '../constants';
 
 import { $entityType } from './entityTypeModel';
 
@@ -33,6 +34,11 @@ _fetchEntity.use((id) => {
       propsWithDeficiencyData
         .forEach(key => response[key].map(url => requests.push(dal.getEntityByUrl(url))));
 
+      if (entityType === entityKeys.people) {
+        requests.push(dal.getEntityByUrl(entity.homeworld));
+        propsWithDeficiencyData.push('homeworld');
+      }
+
       return Promise.all(requests);
     })
     .then(responses => responses.map(response => response.data))
@@ -42,8 +48,11 @@ _fetchEntity.use((id) => {
       propsWithDeficiencyData.forEach((prop) => {
         rest[prop] = [];
 
-        if (entityType === 'films') {
+        if (entityType === entityKeys.films) {
           rest.characters = [];
+        }
+        if (entityType === entityKeys.people) {
+          rest.homeworld = [];
         }
       });
 
@@ -54,8 +63,12 @@ _fetchEntity.use((id) => {
             rest[prop].push(res);
           }
 
-          if (type === 'people' && prop === 'characters') {
+          if (type === entityKeys.people && prop === 'characters') {
             rest.characters.push(res);
+          }
+
+          if (type === entityKeys.planets && prop === 'homeworld') {
+            rest.homeworld.push(res);
           }
         });
       });
@@ -68,9 +81,11 @@ fetchEntity
   .watch(id => _fetchEntity(id));
 
 $entity
-  .on(_fetchEntity.done, (_, { result }) => result);
+  .on(_fetchEntity.done, (_, { result }) => result)
+  .reset(resetStore);
 
 $isLoadingEntity
   .on(_fetchEntity, () => true)
   .on(_fetchEntity.done, () => false)
-  .on(_fetchEntity.fail, () => false);
+  .on(_fetchEntity.fail, () => false)
+  .reset(resetStore);

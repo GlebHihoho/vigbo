@@ -11,7 +11,7 @@ const Header = (props) => {
   const { pathname } = location;
 
   useEffect(() => {
-    const entityType = `/${pathname.split('/')[1]}`;
+    const entityType = pathname.split('/')[1];
     setEntityType(entityType);
   }, [pathname]);
 
