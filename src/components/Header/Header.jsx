@@ -48,6 +48,7 @@ const NavLinkWrap = styled(NavLink)`
   text-transform: uppercase;
   text-decoration: none;
   font-weight: 900;
+  line-height: 20px;
 
   :hover {
     background-color: blue;

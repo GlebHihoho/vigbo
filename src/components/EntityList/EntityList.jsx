@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, Fragment } from 'react';
 import { useStore } from 'effector-react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
@@ -11,9 +11,11 @@ import {
 
   fetchEntityList,
   changePage,
+  resetStore,
 } from '../../model/entityListModel';
 
 import Pagination from '../Pagination';
+import Loader from '../common/Loader';
 
 const EntityList = ({ location }) => {
   const { pathname } = location;
@@ -24,6 +26,8 @@ const EntityList = ({ location }) => {
 
   useEffect(() => {
     fetchEntityList();
+
+    return () => resetStore();
   }, []);
 
   return (
@@ -31,24 +35,25 @@ const EntityList = ({ location }) => {
       <List>
         {
           isLoadingEntityList
-            ? <div>Loading...</div>
+            ? <Loader />
             : (
-              <div>
+              <Fragment>
+                {
+                  entityList.map(
+                    entity => (
+                      <Item key={entity.id}>
+                        <Link to={`${pathname}/${entity.id}`}>{entity.name}</Link>
+                      </Item>
+                    ),
+                  )
+                }
+
                 <Pagination
                   nextPage={nextPage}
                   prevPage={prevPage}
                   changePage={changePage}
                 />
-                {
-                entityList.map(
-                  entity => (
-                    <Item key={entity.id}>
-                      <Link to={`${pathname}/${entity.id}`}>{entity.name}</Link>
-                    </Item>
-                  ),
-                )
-              }
-              </div>
+              </Fragment>
             )
         }
       </List>
@@ -64,7 +69,6 @@ const Container = styled.div`
   justify-content: center;
   align-content: center;
   align-items: center;
-  min-height: 50vh;
 
   text-align: center;
 `;

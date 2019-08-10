@@ -1,5 +1,12 @@
 import React from 'react';
-import isEmpty from 'lodash/isEmpty';
+
+import {
+  Container,
+  Row,
+  Title,
+  Value,
+  Links,
+} from '../common/templateContainers';
 
 const Planets = (props) => {
   const {
@@ -16,32 +23,67 @@ const Planets = (props) => {
     terrain,
   } = props;
 
-  const filmsContent = films.map(film => film.title).join(', ');
-  const residentsContent = residents.map(resident => resident.name).join(', ');
-
   return (
-    <div>
-      <div>{`Name: ${name}`}</div>
-      <div>{`Climate: ${climate}`}</div>
-      <div>{`Diameter: ${diameter}`}</div>
-      <div>{`Gravity: ${gravity}`}</div>
-      <div>{`Orbital period: ${orbital_period}`}</div>
-      <div>{`Population: ${population}`}</div>
-      <div>{`Rotation period: ${rotation_period}`}</div>
-      <div>{`Surface water: ${surface_water}`}</div>
-      <div>{`Terrain ${terrain}`}</div>
+    <Container>
+      <Row>
+        <Title>Name:</Title>
+        <Value>{name}</Value>
+      </Row>
 
-      {
-        !isEmpty(films) && (
-          <div>{`Films: ${filmsContent}`}</div>
-        )
-      }
-      {
-        !isEmpty(residents) && (
-          <div>{`Person: ${residentsContent}`}</div>
-        )
-      }
-    </div>
+      <Row>
+        <Title>Climate:</Title>
+        <Value>{climate}</Value>
+      </Row>
+
+      <Row>
+        <Title>Diameter:</Title>
+        <Value>{diameter}</Value>
+      </Row>
+
+      <Row>
+        <Title>Gravity:</Title>
+        <Value>{gravity}</Value>
+      </Row>
+
+      <Row>
+        <Title>Orbital period:</Title>
+        <Value>{orbital_period}</Value>
+      </Row>
+
+      <Row>
+        <Title>Population:</Title>
+        <Value>{population}</Value>
+      </Row>
+
+      <Row>
+        <Title>Rotation period:</Title>
+        <Value>{rotation_period}</Value>
+      </Row>
+
+      <Row>
+        <Title>Surface water:</Title>
+        <Value>{surface_water}</Value>
+      </Row>
+
+      <Row>
+        <Title>Terrain:</Title>
+        <Value>{terrain}</Value>
+      </Row>
+
+      <Row>
+        <Title>Films:</Title>
+        <Value>
+          <Links data={films} />
+        </Value>
+      </Row>
+
+      <Row>
+        <Title>Person:</Title>
+        <Value>
+          <Links data={residents} />
+        </Value>
+      </Row>
+    </Container>
   );
 };
 

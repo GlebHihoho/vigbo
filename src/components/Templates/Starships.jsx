@@ -1,5 +1,12 @@
 import React from 'react';
-import isEmpty from 'lodash/isEmpty';
+
+import {
+  Container,
+  Row,
+  Title,
+  Value,
+  Links,
+} from '../common/templateContainers';
 
 const Starships = (props) => {
   const {
@@ -19,29 +26,80 @@ const Starships = (props) => {
     starship_class,
   } = props;
 
-  const filmsContent = films.map(film => film.title).join(', ');
-
   return (
-    <div>
-      <div>{`Name: ${name}`}</div>
-      <div>{`Class: ${starship_class}`}</div>
-      <div>{`Consumables: ${consumables}`}</div>
-      <div>{`Cost in credits: ${cost_in_credits}`}</div>
-      <div>{`Crew: ${crew}`}</div>
-      <div>{`Length: ${length}`}</div>
-      <div>{`Manufacturer: ${manufacturer}`}</div>
-      <div>{`Max atmosphering speed: ${max_atmosphering_speed}`}</div>
-      <div>{`Model: ${model}`}</div>
-      <div>{`Passengers: ${passengers}`}</div>
-      <div>{`Cargo capacity: ${cargo_capacity}`}</div>
-      <div>{`Hyperdrive Rating: ${hyperdrive_rating}`}</div>
-      <div>{`MGLT: ${MGLT}`}</div>
-      {
-        !isEmpty(films) && (
-          <div>{`Films: ${filmsContent}`}</div>
-        )
-      }
-    </div>
+    <Container>
+      <Row>
+        <Title>Name:</Title>
+        <Value>{name}</Value>
+      </Row>
+
+      <Row>
+        <Title>Class:</Title>
+        <Value>{starship_class}</Value>
+      </Row>
+
+      <Row>
+        <Title>Consumables:</Title>
+        <Value>{consumables}</Value>
+      </Row>
+
+      <Row>
+        <Title>Cost in credits:</Title>
+        <Value>{cost_in_credits}</Value>
+      </Row>
+
+      <Row>
+        <Title>Crew:</Title>
+        <Value>{crew}</Value>
+      </Row>
+
+      <Row>
+        <Title>Length:</Title>
+        <Value>{length}</Value>
+      </Row>
+
+      <Row>
+        <Title>Manufacturer:</Title>
+        <Value>{manufacturer}</Value>
+      </Row>
+
+      <Row>
+        <Title>Max atmosphering speed:</Title>
+        <Value>{max_atmosphering_speed}</Value>
+      </Row>
+
+      <Row>
+        <Title>Model:</Title>
+        <Value>{model}</Value>
+      </Row>
+
+      <Row>
+        <Title>Passengers:</Title>
+        <Value>{passengers}</Value>
+      </Row>
+
+      <Row>
+        <Title>Cargo capacity:</Title>
+        <Value>{cargo_capacity}</Value>
+      </Row>
+
+      <Row>
+        <Title>Hyperdrive Rating:</Title>
+        <Value>{hyperdrive_rating}</Value>
+      </Row>
+
+      <Row>
+        <Title>MGLT:</Title>
+        <Value>{MGLT}</Value>
+      </Row>
+
+      <Row>
+        <Title>Films:</Title>
+        <Value>
+          <Links data={films} />
+        </Value>
+      </Row>
+    </Container>
   );
 };
 

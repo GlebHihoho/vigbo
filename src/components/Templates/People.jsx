@@ -1,5 +1,12 @@
 import React from 'react';
-import isEmpty from 'lodash/isEmpty';
+
+import {
+  Container,
+  Row,
+  Title,
+  Value,
+  Links,
+} from '../common/templateContainers';
 
 const People = (props) => {
   const {
@@ -15,45 +22,86 @@ const People = (props) => {
     species,
     starships,
     vehicles,
+    homeworld,
   } = props;
 
-  const filmsContent = films.map(film => film.title).join(', ');
-  const speciesContent = species.map(s => s.name).join(', ');
-  const starshipsContent = starships.map(ship => ship.name).join(', ');
-  const vehiclesContent = vehicles.map(vehicle => vehicle.name).join(', ');
-
   return (
-    <div>
-      <div>{`Birth year: ${birth_year}`}</div>
-      <div>{`Eye color: ${eye_color}`}</div>
-      <div>{`Gender: ${gender}`}</div>
-      <div>{`Hair color: ${hair_color}`}</div>
-      <div>{`Height: ${height}`}</div>
-      <div>{`Mass: ${mass}`}</div>
-      <div>{`Name: ${name}`}</div>
-      <div>{`Skin color: ${skin_color}`}</div>
+    <Container>
+      <Row>
+        <Title>Name:</Title>
+        <Value>{name}</Value>
+      </Row>
 
-      {
-        !isEmpty(films) && (
-          <div>{`Films: ${filmsContent}`}</div>
-        )
-      }
-      {
-        !isEmpty(species) && (
-          <div>{`Species: ${speciesContent}`}</div>
-        )
-      }
-      {
-        !isEmpty(starships) && (
-          <div>{`Starships: ${starshipsContent}`}</div>
-        )
-      }
-      {
-        !isEmpty(vehicles) && (
-          <div>{`Vehicles: ${vehiclesContent}`}</div>
-        )
-      }
-    </div>
+      <Row>
+        <Title>Birth year:</Title>
+        <Value>{birth_year}</Value>
+      </Row>
+
+      <Row>
+        <Title>Eye color:</Title>
+        <Value>{eye_color}</Value>
+      </Row>
+
+      <Row>
+        <Title>Gender:</Title>
+        <Value>{gender}</Value>
+      </Row>
+
+      <Row>
+        <Title>Hair color:</Title>
+        <Value>{hair_color}</Value>
+      </Row>
+
+      <Row>
+        <Title>Height:</Title>
+        <Value>{height}</Value>
+      </Row>
+
+      <Row>
+        <Title>Mass:</Title>
+        <Value>{mass}</Value>
+      </Row>
+
+      <Row>
+        <Title>Skin color:</Title>
+        <Value>{skin_color}</Value>
+      </Row>
+
+      <Row>
+        <Title>Homeworld:</Title>
+        <Value>
+          <Links data={homeworld} />
+        </Value>
+      </Row>
+
+      <Row>
+        <Title>Films:</Title>
+        <Value>
+          <Links data={films} />
+        </Value>
+      </Row>
+
+      <Row>
+        <Title>Species:</Title>
+        <Value>
+          <Links data={species} />
+        </Value>
+      </Row>
+
+      <Row>
+        <Title>Starships:</Title>
+        <Value>
+          <Links data={starships} />
+        </Value>
+      </Row>
+
+      <Row>
+        <Title>Vehicles:</Title>
+        <Value>
+          <Links data={vehicles} />
+        </Value>
+      </Row>
+    </Container>
   );
 };
 

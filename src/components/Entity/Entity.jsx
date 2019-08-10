@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, Fragment } from 'react';
 import { useStore } from 'effector-react';
 
 import {
@@ -10,6 +10,7 @@ import {
 } from '../../model/entityModel';
 import { $entityType } from '../../model/entityTypeModel';
 
+import Loader from '../common/Loader';
 import templates from '../Templates/index';
 
 const Entity = (props) => {
@@ -25,13 +26,13 @@ const Entity = (props) => {
   }, []);
 
   return (
-    <div>
+    <Fragment>
       {
         isLoadingEntity
-          ? <div>Loading...</div>
+          ? <Loader />
           : templates[entityType].getTemplate(entity)
       }
-    </div>
+    </Fragment>
   );
 };
 

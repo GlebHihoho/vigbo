@@ -1,5 +1,12 @@
 import React from 'react';
-import isEmpty from 'lodash/isEmpty';
+
+import {
+  Container,
+  Row,
+  Title,
+  Value,
+  Links,
+} from '../common/templateContainers';
 
 const Species = (props) => {
   const {
@@ -17,33 +24,74 @@ const Species = (props) => {
     skin_colors,
   } = props;
 
-  const filmsContent = films.map(film => film.title).join(', ');
-  const peopleContent = people.map(person => person.name).join(', ');
-
   return (
-    <div>
-      <div>{`Name: ${name}`}</div>
-      <div>{`Average height: ${average_height}`}</div>
-      <div>{`Average lifespan: ${average_lifespan}`}</div>
-      <div>{`Classification: ${classification}`}</div>
-      <div>{`Designation: ${designation}`}</div>
-      <div>{`Eye colors: ${eye_colors}`}</div>
-      <div>{`Hair colors: ${hair_colors}`}</div>
-      <div>{`Homeworld ${homeworld}`}</div>
-      <div>{`Language ${language}`}</div>
-      <div>{`Skin colors: ${skin_colors}`}</div>
+    <Container>
+      <Row>
+        <Title>Name:</Title>
+        <Value>{name}</Value>
+      </Row>
 
-      {
-        !isEmpty(films) && (
-          <div>{`Films: ${filmsContent}`}</div>
-        )
-      }
-      {
-        !isEmpty(people) && (
-          <div>{`Person: ${peopleContent}`}</div>
-        )
-      }
-    </div>
+      <Row>
+        <Title>Average height:</Title>
+        <Value>{average_height}</Value>
+      </Row>
+
+      <Row>
+        <Title>Average lifespan:</Title>
+        <Value>{average_lifespan}</Value>
+      </Row>
+
+      <Row>
+        <Title>Classification:</Title>
+        <Value>{classification}</Value>
+      </Row>
+
+      <Row>
+        <Title>Designation:</Title>
+        <Value>{designation}</Value>
+      </Row>
+
+      <Row>
+        <Title>Eye colors:</Title>
+        <Value>{eye_colors}</Value>
+      </Row>
+
+      <Row>
+        <Title>Hair colors:</Title>
+        <Value>{hair_colors}</Value>
+      </Row>
+
+      <Row>
+        <Title>Homeworld:</Title>
+        <Value>
+          <Links data={homeworld} />
+        </Value>
+      </Row>
+
+      <Row>
+        <Title>Language:</Title>
+        <Value>{language}</Value>
+      </Row>
+
+      <Row>
+        <Title>Skin colors:</Title>
+        <Value>{skin_colors}</Value>
+      </Row>
+
+      <Row>
+        <Title>Films:</Title>
+        <Value>
+          <Links data={films} />
+        </Value>
+      </Row>
+
+      <Row>
+        <Title>Person:</Title>
+        <Value>
+          <Links data={people} />
+        </Value>
+      </Row>
+    </Container>
   );
 };
 

@@ -5,43 +5,47 @@ import {
   HashRouter as Router, Route, Switch, Redirect,
 } from 'react-router-dom';
 
-import ResourcesList from './components/Header';
+import Header from './components/Header';
 import EntityList from './components/EntityList';
 import Entity from './components/Entity';
 
 import { entities } from './constants';
 
 const App = () => (
-  <Container>
+  <MainContainer>
     <Router>
-      <ResourcesList />
-      <Switch>
-        {
-          entities.map(entity => (
-            <Route
-              key={entity}
-              path={`/${entity}`}
-              component={EntityList}
-              exact
-            />
-          ))
-        }
+      <Header />
 
-        {
-          entities.map(entity => (
-            <Route
-              key={uniqueId()}
-              path={`/${entity}/:id`}
-              component={Entity}
-            />
-          ))
-        }
+      <MainContent>
+        <Switch>
+          {
+            entities.map(entity => (
+              <Route
+                key={entity}
+                path={`/${entity}`}
+                component={EntityList}
+                exact
+              />
+            ))
+          }
 
-        <Redirect exact from="/" to="/people" />
-      </Switch>
+          {
+            entities.map(entity => (
+              <Route
+                key={uniqueId()}
+                path={`/${entity}/:id`}
+                component={Entity}
+              />
+            ))
+          }
+
+          <Redirect exact from="/" to="/people" />
+        </Switch>
+      </MainContent>
+
     </Router>
     <GlobalStyle />
-  </Container>
+  </MainContainer>
 );
 
 export default App;
@@ -61,7 +65,12 @@ const GlobalStyle = createGlobalStyle`
   }
 `;
 
-const Container = styled.div`
+const MainContainer = styled.div`
   width: 900px;
+  height: 100vh;
   margin: 0 auto;
+`;
+
+const MainContent = styled.div`
+  height: calc(100vh - 60px);
 `;

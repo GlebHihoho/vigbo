@@ -34,7 +34,7 @@ _fetchEntity.use((id) => {
       propsWithDeficiencyData
         .forEach(key => response[key].map(url => requests.push(dal.getEntityByUrl(url))));
 
-      if (entityType === entityKeys.people) {
+      if (entityType === entityKeys.people || entityType === entityKeys.species) {
         requests.push(dal.getEntityByUrl(entity.homeworld));
         propsWithDeficiencyData.push('homeworld');
       }
@@ -51,7 +51,7 @@ _fetchEntity.use((id) => {
         if (entityType === entityKeys.films) {
           rest.characters = [];
         }
-        if (entityType === entityKeys.people) {
+        if (entityType === entityKeys.people || entityType === entityKeys.species) {
           rest.homeworld = [];
         }
       });

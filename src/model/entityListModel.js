@@ -12,6 +12,7 @@ export const $prevPage = createStore(null);
 
 export const fetchEntityList = createEvent();
 export const changePage = createEvent();
+export const resetStore = createEvent();
 
 const _fetchEntityList = createEffect();
 
@@ -54,4 +55,5 @@ $prevPage
 $isLoadingEntityList
   .on(_fetchEntityList, () => true)
   .on(_fetchEntityList.done, () => false)
-  .on(_fetchEntityList.fail, () => false);
+  .on(_fetchEntityList.fail, () => false)
+  .reset(resetStore);

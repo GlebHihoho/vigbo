@@ -1,5 +1,12 @@
 import React from 'react';
-import isEmpty from 'lodash/isEmpty';
+
+import {
+  Container,
+  Row,
+  Title,
+  Value,
+  Links,
+} from '../common/templateContainers';
 
 const Films = (props) => {
   const {
@@ -16,46 +23,73 @@ const Films = (props) => {
     vehicles,
   } = props;
 
-  const charactersContent = characters.map(character => character.name).join(', ');
-  const planetsContent = planets.map(p => p.name).join(', ');
-  const speciesContent = species.map(s => s.name).join(', ');
-  const starshipsContent = starships.map(starship => starship.name).join(', ');
-  const vehiclesContent = vehicles.map(vehicle => vehicle.name).join(', ');
-
   return (
-    <div>
-      <div>{`Director: ${director}`}</div>
-      <div>{`Episode id: ${episode_id}`}</div>
-      <div>{`Opening crawl: ${opening_crawl}`}</div>
-      <div>{`Producer: ${producer}`}</div>
-      <div>{`Release date: ${release_date}`}</div>
-      <div>{`Title: ${title}`}</div>
-      {
-        !isEmpty(characters) && (
-          <div>{`Films: ${charactersContent}`}</div>
-        )
-      }
-      {
-        !isEmpty(planets) && (
-          <div>{`Species: ${planetsContent}`}</div>
-        )
-      }
-      {
-        !isEmpty(species) && (
-          <div>{`Starships: ${speciesContent}`}</div>
-        )
-      }
-      {
-        !isEmpty(starships) && (
-          <div>{`Vehicles: ${starshipsContent}`}</div>
-        )
-      }
-      {
-        !isEmpty(vehicles) && (
-          <div>{`Vehicles: ${vehiclesContent}`}</div>
-        )
-      }
-    </div>
+    <Container>
+      <Row>
+        <Title>Title:</Title>
+        <Value>{title}</Value>
+      </Row>
+
+      <Row>
+        <Title>Director:</Title>
+        <Value>{director}</Value>
+      </Row>
+
+      <Row>
+        <Title>Producer:</Title>
+        <Value>{producer}</Value>
+      </Row>
+
+      <Row>
+        <Title>Episode id:</Title>
+        <Value>{episode_id}</Value>
+      </Row>
+
+      <Row>
+        <Title>Opening crawl:</Title>
+        <Value>{opening_crawl}</Value>
+      </Row>
+
+      <Row>
+        <Title>Release date:</Title>
+        <Value>{release_date}</Value>
+      </Row>
+
+      <Row>
+        <Title>Characters:</Title>
+        <Value>
+          <Links data={characters} />
+        </Value>
+      </Row>
+
+      <Row>
+        <Title>Planets:</Title>
+        <Value>
+          <Links data={planets} />
+        </Value>
+      </Row>
+
+      <Row>
+        <Title>Species:</Title>
+        <Value>
+          <Links data={species} />
+        </Value>
+      </Row>
+
+      <Row>
+        <Title>Starships:</Title>
+        <Value>
+          <Links data={starships} />
+        </Value>
+      </Row>
+
+      <Row>
+        <Title>Vehicles:</Title>
+        <Value>
+          <Links data={vehicles} />
+        </Value>
+      </Row>
+    </Container>
   );
 };
 
