@@ -19,7 +19,7 @@
 Используя SWAPI (https://swapi.co/) реализовать приложение, которое показывает список персонажей из вселенной Star Wars и позволяет просматривать подробную информацию с указанием родной планеты, фильмов в которых он участвовал и т.д.
 
 
-##  ТЗ
+## ТЗ:
 
 Реализовать Single Page Application (SPA) для просмотра информации по вселенной Star Wars (SW).
 
@@ -59,7 +59,7 @@
 ## [Commits naming](https://github.com/artalar/blog/blob/master/src/pages/commits-naming.md)
 
 
-## Available Scripts
+## Available Scripts:
 
 In the project directory, you can run:
 

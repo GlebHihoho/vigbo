@@ -8,6 +8,7 @@ import {
 import Header from './components/Header';
 import EntityList from './components/EntityList';
 import Entity from './components/Entity';
+import PageNotFound from './components/PageNotFound';
 
 import { entities } from './constants';
 
@@ -40,6 +41,8 @@ const App = () => (
           }
 
           <Redirect exact from="/" to="/people" />
+
+          <Route path="*" component={PageNotFound} />
         </Switch>
       </MainContent>
 
