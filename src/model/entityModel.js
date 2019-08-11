@@ -34,7 +34,9 @@ _fetchEntity.use((id) => {
       propsWithDeficiencyData
         .forEach(key => response[key].map(url => requests.push(dal.getEntityByUrl(url))));
 
-      if (entityType === entityKeys.people || entityType === entityKeys.species) {
+      if (
+        (entityType === entityKeys.people || entityType === entityKeys.species) && entity.homeworld
+      ) {
         requests.push(dal.getEntityByUrl(entity.homeworld));
         propsWithDeficiencyData.push('homeworld');
       }
