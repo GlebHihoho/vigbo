@@ -19,6 +19,9 @@
 Используя SWAPI (https://swapi.co/) реализовать приложение, которое показывает список персонажей из вселенной Star Wars и позволяет просматривать подробную информацию с указанием родной планеты, фильмов в которых он участвовал и т.д.
 
 
+## [GitHub Pages Link](https://glebhihoho.github.io/vigbo/#/people)
+
+
 ## [Commits naming](https://github.com/artalar/blog/blob/master/src/pages/commits-naming.md)
 
 
