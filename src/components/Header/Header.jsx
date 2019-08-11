@@ -3,7 +3,6 @@ import { NavLink, withRouter } from 'react-router-dom';
 import styled from 'styled-components';
 
 import { entities } from '../../constants';
-
 import { setEntityType } from '../../model/entityTypeModel';
 
 const Header = (props) => {

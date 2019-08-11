@@ -6,8 +6,8 @@ import {
 } from 'react-router-dom';
 
 import Header from './components/Header';
-import EntityList from './components/EntityList';
 import Entity from './components/Entity';
+import EntityList from './components/EntityList';
 import PageNotFound from './components/PageNotFound';
 
 import { entities } from './constants';
